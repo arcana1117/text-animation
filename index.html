@@ -2,47 +2,95 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Text Animation06</title>
+  <title>About US</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-    body, html { margin: 0; padding: 0; height: 100%; }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
     .container {
-      overflow: hidden; width: 100%; height: 100vh;
-      display: flex; justify-content: center; align-items: center;
+      position: relative;
+      width: 100%;
+      height: 300px; /* STUDIO iframe 高さに合わせて固定 */
       background-color: #3c3c3c;
+      overflow: hidden;
     }
+
     .visuallyHidden {
-      position: absolute !important; width: 1px !important;
-      height: 1px !important; margin: -1px !important; padding: 0 !important;
-      overflow: hidden !important; clip: rect(0 0 0 0) !important;
-      white-space: nowrap !important; border: 0 !important;
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
     }
+
     .text {
-      overflow: hidden; position: relative;
-      display: flex; justify-content: center; align-items: center;
-      color: #fff; font-family: 'Roboto Mono', monospace;
-      font-weight: 700; text-transform: uppercase;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
       font-size: 5vw;
+      white-space: nowrap;
     }
-    @media screen and (min-width: 1440px) { .text { font-size: 72px; } }
-    @media screen and (min-width: 990px) and (max-width: 1280px) { .text { font-size: 52px; } }
-    @media screen and (min-width: 500px) and (max-width: 889px) { .text { font-size: 40px; } }
-    @media screen and (max-width: 499px) { .text { font-size: 28px; } }
-    .text.is-active { --skewX: 0deg; --x: 0; }
-    .text1, .text2, .text3 { transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
-    .text2, .text3 { position: absolute; }
+
+    @media screen and (min-width: 1440px) {
+      .text { font-size: 60px; }
+    }
+
+    @media screen and (min-width: 990px) and (max-width: 1280px) {
+      .text { font-size: 45px; }
+    }
+
+    @media screen and (min-width: 500px) and (max-width: 889px) {
+      .text { font-size: 36px; }
+    }
+
+    @media screen and (max-width: 499px) {
+      .text { font-size: 28px; }
+    }
+
+    .text1, .text2, .text3 {
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .text2, .text3 {
+      position: absolute;
+    }
+
     .text1 {
       mask-image: linear-gradient(to bottom, #000 33.3%, transparent 33.3%);
-      transform: translateX(var(--x, -110%)) skewX(var(--skewX, 40deg));
+      transform: translateX(-110%) skewX(40deg);
     }
+
     .text2 {
       mask-image: linear-gradient(to bottom, transparent 33.3%, #000 33.3%, #000 66.6%, transparent 66.6%);
-      transform: translateX(var(--x, 110%)) skewX(var(--skewX, -40deg));
+      transform: translateX(110%) skewX(-40deg);
     }
+
     .text3 {
       mask-image: linear-gradient(to bottom, transparent 66.6%, #000 66.6%);
-      transform: translateX(var(--x, -110%)) skewX(var(--skewX, 40deg));
+      transform: translateX(-110%) skewX(40deg);
+    }
+
+    .text.is-active .text1,
+    .text.is-active .text2,
+    .text.is-active .text3 {
+      transform: translateX(0) skewX(0);
     }
   </style>
 </head>
@@ -58,11 +106,10 @@
     </div>
   </div>
   <script>
-    const text = document.querySelector('.text');
-    text.classList.add('is-active');
-    setInterval(() => {
-      text.classList.toggle('is-active');
-    }, 3200);
+    // 一度だけアニメーションを実行
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.text').classList.add('is-active');
+    });
   </script>
 </body>
 </html>
