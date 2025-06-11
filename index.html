@@ -2,71 +2,67 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>About US</title>
+  <title>Typing Animation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      background-color: transparent;
-    }
-
-    .container {
-      width: 100%;
-      height: 300px;
-      background-color: transparent;
+    body {
+      background-color: #000; /* 背景を黒、透明にも変更可 */
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      padding: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      height: 100vh;
     }
 
-    .text {
-      font-family: 'Roboto Mono', monospace;
-      font-weight: 700;
-      font-size: 3.5vw;
-      color: transparent;
-      position: relative;
+    .typing-container {
+      max-width: 800px;
+      line-height: 1.8;
+      white-space: pre-wrap;
     }
 
-    .text::before {
-      content: "About US";
-      position: absolute;
-      top: 0;
-      left: 0;
-      color: #FF0080; /* 好きなカラーに変更可能 */
-      overflow: hidden;
-      white-space: nowrap;
-      width: 0;
-      animation: reveal 1s ease-out forwards;
+    .cursor::after {
+      content: "|";
+      animation: blink 1s infinite;
     }
 
-    @keyframes reveal {
-      to {
-        width: 100%;
-      }
-    }
-
-    @media screen and (min-width: 1440px) {
-      .text { font-size: 60px; }
-    }
-
-    @media screen and (min-width: 990px) and (max-width: 1280px) {
-      .text { font-size: 45px; }
-    }
-
-    @media screen and (min-width: 500px) and (max-width: 889px) {
-      .text { font-size: 36px; }
-    }
-
-    @media screen and (max-width: 499px) {
-      .text { font-size: 28px; }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="text">About US</div>
-  </div>
+  <div class="typing-container"><span id="typedText" class="cursor"></span></div>
+
+  <script>
+    const text = `IT技術の発展により、
+急速に変化し続ける現代社会において、
+SNSは人々の生活と共存するものとなりました。
+頭では理解していても、
+この【変化】を受け入れ、
+積極的に取り入れることは容易ではありません。
+モノや情報が溢れ、
+多様性が求められる現代において、
+弊社はSNSマーケティングとセールスの領域で新たな価値を創造し、
+その存在意義を明確に示してまいります。`;
+
+    const typedText = document.getElementById('typedText');
+    let index = 0;
+
+    function typeCharacter() {
+      if (index < text.length) {
+        typedText.textContent += text[index];
+        index++;
+        setTimeout(typeCharacter, 40); // 文字ごとの速度（ミリ秒）
+      } else {
+        typedText.classList.remove('cursor'); // 終了後カーソルを非表示
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', typeCharacter);
+  </script>
 </body>
 </html>
