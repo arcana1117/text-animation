@@ -5,110 +5,68 @@
   <title>About US</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
-
     body, html {
       margin: 0;
       padding: 0;
+      background-color: transparent;
     }
 
     .container {
-      position: relative;
       width: 100%;
       height: 300px;
-      background-color: transparent; /* ← 背景透明 */
-      overflow: hidden;
-    }
-
-    .visuallyHidden {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      margin: -1px !important;
-      padding: 0 !important;
-      overflow: hidden !important;
-      clip: rect(0 0 0 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
-
-    .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      background-color: transparent;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
+      overflow: hidden;
+    }
+
+    .text {
       font-family: 'Roboto Mono', monospace;
       font-weight: 700;
-      text-transform: uppercase;
-      font-size: 5vw;
+      font-size: 3.5vw;
+      color: transparent;
+      position: relative;
+    }
+
+    .text::before {
+      content: "About US";
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: #FF0080; /* 好きなカラーに変更可能 */
+      overflow: hidden;
       white-space: nowrap;
+      width: 0;
+      animation: reveal 1s ease-out forwards;
+    }
+
+    @keyframes reveal {
+      to {
+        width: 100%;
+      }
     }
 
     @media screen and (min-width: 1440px) {
-      .text { font-size: 80px; }
+      .text { font-size: 60px; }
     }
 
     @media screen and (min-width: 990px) and (max-width: 1280px) {
-      .text { font-size: 65px; }
+      .text { font-size: 45px; }
     }
 
     @media screen and (min-width: 500px) and (max-width: 889px) {
-      .text { font-size: 50px; }
+      .text { font-size: 36px; }
     }
 
     @media screen and (max-width: 499px) {
-      .text { font-size: 38px; }
-    }
-
-    .text1, .text2, .text3 {
-      transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); /* ← 速くした */
-    }
-
-    .text2, .text3 {
-      position: absolute;
-    }
-
-    .text1 {
-      mask-image: linear-gradient(to bottom, #000 33.3%, transparent 33.3%);
-      transform: translateX(-110%) skewX(40deg);
-    }
-
-    .text2 {
-      mask-image: linear-gradient(to bottom, transparent 33.3%, #000 33.3%, #000 66.6%, transparent 66.6%);
-      transform: translateX(110%) skewX(-40deg);
-    }
-
-    .text3 {
-      mask-image: linear-gradient(to bottom, transparent 66.6%, #000 66.6%);
-      transform: translateX(-110%) skewX(40deg);
-    }
-
-    .text.is-active .text1,
-    .text.is-active .text2,
-    .text.is-active .text3 {
-      transform: translateX(0) skewX(0);
+      .text { font-size: 28px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="headline">
-      <div class="visuallyHidden">About US</div>
-      <div class="text" aria-hidden="true">
-        <div class="text1">AboutUS</div>
-        <div class="text2">AboutUS</div>
-        <div class="text3">AboutUS</div>
-      </div>
-    </div>
+    <div class="text">About US</div>
   </div>
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('.text').classList.add('is-active');
-    });
-  </script>
 </body>
 </html>
