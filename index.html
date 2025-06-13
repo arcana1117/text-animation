@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
-    /* ベースリセット */
     body, html {
       margin: 0;
       padding: 0;
@@ -22,7 +21,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #3c3c3c;
+      background-color: transparent; /* 背景を透明に */
     }
 
     .visuallyHidden {
@@ -44,13 +43,12 @@
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'Alfa Slab One', cursive;
       font-weight: 700;
       text-transform: uppercase;
-      font-size: 5vw; /* デフォルトサイズ（可変） */
+      font-size: 5vw;
     }
 
-    /* メディアクエリによるフォントサイズ調整 */
     @media screen and (min-width: 1440px) {
       .text {
         font-size: 72px;
@@ -127,9 +125,9 @@
   <script>
     const text = document.querySelector('.text');
     text.classList.add('is-active');
-    setInterval(() => {
-      text.classList.toggle('is-active');
-    }, 3200);
+    setTimeout(() => {
+      text.classList.remove('is-active');
+    }, 3200); // 一度だけアニメーションを実行
   </script>
 </body>
 </html>
